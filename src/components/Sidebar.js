@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import store from "../utils/store";
 
 const Sidebar = () => {
 
@@ -11,7 +10,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="p-5 shadow-lg w-48 bg-white overflow-y-auto">
+    <div className="p-5 shadow-lg w-72 h-full sticky bg-white ">
       <ul className="">
         <li className="flex items-center gap-2 text-gray-700 bg-gray-100 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
           <lord-icon

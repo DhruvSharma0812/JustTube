@@ -1,19 +1,21 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { toggleMenu } from '../utils/appSlice';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
   const dispatch = useDispatch();
   const toggleMenuHandler = () => {
-    dispatch (toggleMenu())
+    dispatch(toggleMenu())
   }
 
   return (
-    <div className='grid grid-flow-col p-3 shadow-lg bg-white items-center'>
+    <div className='grid grid-flow-col p-3 shadow-lg bg-white items-center '>
 
       {/* Left Section with Hamburger Logo and Youtube Logo */}
       <div className='flex items-center col-span-1 gap-4'>
+        
         <img
           onClick={() => toggleMenuHandler()}
           className='h-6 cursor-pointer'
@@ -21,11 +23,14 @@ const Header = () => {
           alt="Youtube Hamburger img"
         />
 
-        <img
-          className='h-6 cursor-pointer'
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"
-          alt="Youtube Logo"
-        />
+        <a href="/">
+          <img
+            className='h-6 cursor-pointer'
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"
+            alt="Youtube Logo"
+          />
+        </a>
+  
       </div>
 
       {/* Middle Section with Search Bar and Search Icon  */}
@@ -43,10 +48,10 @@ const Header = () => {
 
       {/* Last Sectino with User icon  */}
       <div className='col-span-1'>
-      <lord-icon
-    src="https://cdn.lordicon.com/hrjifpbq.json"
-    trigger="hover">
-</lord-icon>
+        <lord-icon
+          src="https://cdn.lordicon.com/hrjifpbq.json"
+          trigger="hover">
+        </lord-icon>
       </div>
     </div>
   )
