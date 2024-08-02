@@ -16,7 +16,6 @@ const ButtonList = () => {
       <Button name="Music"/>
       <Button name="Tourism"/>
       <Button name="Vlog"/>
-
     </div>
   )
 }
