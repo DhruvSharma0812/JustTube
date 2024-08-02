@@ -6,6 +6,7 @@ import { GOOGLE_API_KEY, VIDEO_INFO_API } from '../utils/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faComment, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import CmntContainer from './CmntContainer';
+import LiveChat from './LiveChat';
 
 const WatchPage = () => {
     const [searchParams] = useSearchParams();
@@ -50,7 +51,7 @@ const WatchPage = () => {
     };
 
     return (
-        <div className='md:flex md:flex-wrap md:justify-start items-center ml-24 md:w-full mt-6 '>
+        <div className='md:flex md:flex-wrap md:justify-start  ml-24 md:w-full mt-6 '>
             <div className='  flex flex-col md:w-3/5 md:mr-3 mb-4' >
                 <div className=''>
                     <iframe
@@ -99,7 +100,12 @@ const WatchPage = () => {
                 </div>
                 <CmntContainer />
             </div>
-
+            <div className='w-1/4'>
+                <div className='text-black bg-white w-full rounded-t-lg p-2 m-2 mb-0 border border-black'>
+                    <h2 className='text-lg font-semibold'>Live Chat</h2>
+                </div>
+                <LiveChat />
+            </div>
         </div>
     );
 };
