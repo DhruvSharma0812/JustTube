@@ -5,6 +5,7 @@ import store from "./utils/store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainContainer from '../src/components/MainContainer'
 import WatchPage from "./components/WatchPage";
+import Results from "./components/Results";
 
 function App() {
 
@@ -22,6 +23,11 @@ function App() {
           path: "watch",
           element: <WatchPage />
         }, 
+        
+        {
+          path: "results",
+          element: <Results />
+        }
       ]
     }
   ])
@@ -29,7 +35,7 @@ function App() {
   return (
     <div className="">
       <Provider store={store}>
-        <Header />
+        {/* <Header /> */}
         <RouterProvider router={appRouter} />
       </Provider>
     </div>

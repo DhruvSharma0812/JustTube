@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const VideoContainer = () => {
   const [videos, setVideos] = useState([]);
 
+  // Fetch Video from Youtube API
   useEffect(() => {
     getVideos();
   }, []);
@@ -18,7 +19,14 @@ const VideoContainer = () => {
   }
 
   return (
-    <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 p-4'>
+    // <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 p-4'>
+    //   {videos.map((video) => (
+    //     <Link key={video.id} to={"/watch?v=" + video.id}>
+    //       <VideoCard info={video} />
+    //     </Link>
+    //   ))}
+    // </div>
+    <div className='md:flex md:flex-wrap md:justify-center'>
       {videos.map((video) => (
         <Link key={video.id} to={"/watch?v=" + video.id}>
           <VideoCard info={video} />

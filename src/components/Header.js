@@ -1,25 +1,76 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { toggleMenu } from '../utils/appSlice';
-import { Link } from 'react-router-dom';
+import { LOGO, YOUTUBE_SEARCH_API } from '../utils/constants';
+import { cacheResults } from '../utils/searchSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
+  const searchCache = useSelector((store) => store.search);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const toggleMenuHandler = () => {
     dispatch(toggleMenu())
   }
 
-  return (
-    <div className='grid grid-flow-col p-3 shadow-lg bg-white items-center '>
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      navigate(`/results?search_query=${searchQuery}`); // Navigate to Results page with search query
+    }
+  }
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchCache[searchQuery]) {
+        setSuggestions(searchCache[searchQuery]);
+      } else {
+        getSearchSuggestions();
+      }
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery]);
+
+  const getSearchSuggestions = async () => {
+    if (!searchQuery) {
+      setSuggestions([]);
+      return;
+    }
+    try {
+      const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+      const json = await data.json();
+      setSuggestions(json[1] || []);
+      dispatch(
+        cacheResults({
+          [searchQuery]: json[1],
+        })
+      );
+    } catch (error) {
+      console.error('Error fetching suggestions:', error);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setSearchQuery (suggestion);
+    setShowSuggestions (false);
+    navigate (`/results?search_query=${searchQuery}`);
+  }
+
+  return (
+    <div className='grid grid-flow-col p-3 shadow-lg bg-white items-center'>
       {/* Left Section with Hamburger Logo and Youtube Logo */}
       <div className='flex items-center col-span-1 gap-4'>
-        
         <img
-          onClick={() => toggleMenuHandler()}
+          onClick={toggleMenuHandler}
           className='h-6 cursor-pointer'
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAARVBMVEX///8jHyAgHB0OBQgMAAWlpKQpJSaenZ309PUAAAAIAAD8/Pz5+fna2tqop6dvbW1oZmevrq4tKivFxMQYExRiYGC+vr7Dc4WrAAABB0lEQVR4nO3cS3LCMBAFQGIIIBPbhN/9jxqSyiIsTUnlydB9g1eSNV5MvdUKAAAAAAAAAAAAAAAAXtEwvscwDk3yHabSb2Loy/TRIOHUv8XRH+sHHMrSqR6U+hd1jHSE90P8lHC2/Lc0/0vzMy3WMdynxaFBwu+Jv4uh0cQHAAAAAAAAAIB59jG0ijdcT9sYTtcmK0PncumiuJRz/YD7bbf0ut4f3br+GvQt2PblrXrC3WbpUA/6sXrC/GeY/zvM/5aGmofHZiu0S//M/GoVDwAAAAAAAAAAZsjeuRerN1HL7hPy95fm76DNnzD/Lc3/0rxAJ3v+Xn0AAAAAAAAAAAAAAAD4T74AYhs1O+vt3ioAAAAASUVORK5CYII="
+          src={LOGO}
           alt="Youtube Hamburger img"
         />
 
@@ -30,23 +81,45 @@ const Header = () => {
             alt="Youtube Logo"
           />
         </a>
-  
       </div>
 
-      {/* Middle Section with Search Bar and Search Icon  */}
-      <div className="col-span-10 flex justify-center items-center">
-        <input
-          className="w-1/2 p-2 px-5 border border-gray-700 rounded-l-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-          type="text"
-          placeholder="Search"
-        />
-        <button className=" p-3 bg-gray-100 hover:bg-gray-300 border border-gray-700 rounded-r-3xl focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <img className='h-4' src="https://static-00.iconduck.com/assets.00/search-icon-2048x2048-cmujl7en.png" alt="" />
-        </button>
+      {/* Middle Section with Search Bar and Search Icon */}
+      <div className="col-span-10 z-20">
+        <div className='flex justify-center items-center'>
+          <input
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => setShowSuggestions(true)}
+            onBlur={() => setShowSuggestions(false)}
+            className="w-1/2 p-2 px-5 border border-gray-700 rounded-l-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="text"
+            placeholder="Search"
+          />
+          <button
+            onClick={handleSearch}
+            className="p-3 bg-gray-100 hover:bg-gray-300 border border-gray-700 rounded-r-3xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <img className='h-4' src="https://static-00.iconduck.com/assets.00/search-icon-2048x2048-cmujl7en.png" alt="Search Icon" />
+          </button>
+        </div>
+
+        {showSuggestions && suggestions.length > 0 && (
+          <div className=' absolute w-[36.9%] left-[34.33333%] bg-white py-2 px-2 shadow-lg rounded-lg border border-gray-100'>
+            <ul>
+              {suggestions.map((s) => (
+                <li 
+                  key={s} 
+                  onMouseDown={() => handleSuggestionClick(s)}
+                  className='flex cursor-pointer items-center gap-2 py-2 px-3 shadow-sm hover:bg-gray-100'>
+                  <img className='h-4' src="https://static-00.iconduck.com/assets.00/search-icon-2048x2048-cmujl7en.png" alt="Search Icon" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
-
-      {/* Last Sectino with User icon  */}
+      {/* Last Section with User icon */}
       <div className='col-span-1'>
         <lord-icon
           src="https://cdn.lordicon.com/hrjifpbq.json"
@@ -57,4 +130,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Header;

@@ -10,11 +10,11 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="p-5 shadow-lg w-72 h-full sticky bg-white ">
+    <div className="p-5 shadow-lg w-[15%] h-full bg-white ">
       <ul className="">
         <li className="flex items-center gap-2 text-gray-700 bg-gray-100 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
           <lord-icon
-            style={{ width: "24px", height: "24px" }}
+            style={{ width: "14px", height: "14px" }}
             src="https://cdn.lordicon.com/wmwqvixz.json"
             trigger="hover"
           ></lord-icon>
@@ -25,7 +25,7 @@ const Sidebar = () => {
           <lord-icon
             src="https://cdn.lordicon.com/qisgortv.json"
             trigger="hover"
-            style={{ width: "24px", height: "24px" }}
+            style={{ width: "14px", height: "14px" }}
           ></lord-icon>
           Shorts
         </li>
@@ -34,7 +34,7 @@ const Sidebar = () => {
           <lord-icon
             src="https://cdn.lordicon.com/gewhxiwb.json"
             trigger="hover"
-            style={{ width: "24px", height: "24px" }}>
+            style={{ width: "14px", height: "14px" }}>
           </lord-icon>
           Videos
         </li>
@@ -43,60 +43,20 @@ const Sidebar = () => {
           <lord-icon
             src="https://cdn.lordicon.com/uwtqzoif.json"
             trigger="hover"
-            style={{ width: "24px", height: "24px" }}
+            style={{ width: "14px", height: "14px" }}
           ></lord-icon>
           Live
         </li>
       </ul>
       <hr className="my-1 border-t-1 border-black" />
 
-      <h1 className="font-bold pt-5 pb-2 text-gray-900">Explore</h1>
-      <ul className="">
-        <li className="flex items-center gap-2 text-gray-700 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
-          <span className="font-bold h-6 px-2">#</span> Trending
-        </li>
-        <li className="flex items-center gap-2 text-gray-700 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
-          <lord-icon
-            src="https://cdn.lordicon.com/cosvjkbu.json"
-            trigger="hover"
-            style={{ width: "24px", height: "24px" }}>
-          </lord-icon>
-          Shopping
-        </li>
-        <li className="flex items-center gap-2 text-gray-700 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
-          <lord-icon
-            src="https://cdn.lordicon.com/ihajlcqd.json"
-            trigger="hover"
-            style={{ width: "24px", height: "24px" }}>
-          </lord-icon>
-          Fashion & beauty
-        </li>
-        <li className="flex items-center gap-2 text-gray-700 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
-          <lord-icon
-            src="https://cdn.lordicon.com/ceogkocw.json"
-            trigger="hover"
-            style={{ width: "24px", height: "24px" }}>
-          </lord-icon>
-          Podcasts
-        </li>
-        <li className="flex items-center gap-2 text-gray-700 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
-          <lord-icon
-            src="https://cdn.lordicon.com/gemrrbjz.json"
-            trigger="hover"
-            style={{ width: "24px", height: "24px" }}>
-          </lord-icon>
-          News
-        </li>
-      </ul>
-
-      <hr className="my-1 border-t-1 border-black" />
       <h1 className="font-bold pt-5 pb-2 text-gray-900">More from Youtube</h1>
       <ul className="">
         <li className="flex items-center gap-2 text-gray-700 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
           <lord-icon
             src="https://cdn.lordicon.com/yvsfcbjq.json"
             trigger="hover"
-            style={{ width: "24px", height: "24px" }}>
+            style={{ width: "14px", height: "14px" }}>
           </lord-icon>
           Music
         </li>
@@ -104,7 +64,7 @@ const Sidebar = () => {
           <lord-icon
             src="https://cdn.lordicon.com/jdngjjzg.json"
             trigger="hover"
-            style={{ width: "24px", height: "24px" }}>
+            style={{ width: "14px", height: "14px" }}>
           </lord-icon>
           Sports
         </li>
@@ -112,7 +72,7 @@ const Sidebar = () => {
           <lord-icon
             src="https://cdn.lordicon.com/nkmrdfzh.json"
             trigger="hover"
-            style={{ width: "24px", height: "24px" }}>
+            style={{ width: "14px", height: "14px" }}>
           </lord-icon>
           Gaming
         </li>
@@ -120,11 +80,53 @@ const Sidebar = () => {
           <lord-icon
             src="https://cdn.lordicon.com/wwdlquyd.json"
             trigger="hover"
-            style={{ width: "24px", height: "24px" }}>
+            style={{ width: "14px", height: "14px" }}>
           </lord-icon>
           Movies
         </li>
       </ul>
+      <hr className="my-1 border-t-1 border-black" />
+
+      <h1 className="font-bold pt-5 pb-2 text-gray-900">Explore</h1>
+      <ul className="">
+        <li className="flex items-center gap-2 text-gray-700 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
+          <span className="font-bold h-6 ">#</span> Trending
+        </li>
+        <li className="flex items-center gap-2 text-gray-700 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
+          <lord-icon
+            src="https://cdn.lordicon.com/cosvjkbu.json"
+            trigger="hover"
+            style={{ width: "14px", height: "14px" }}>
+          </lord-icon>
+          Shopping
+        </li>
+        <li className="flex items-center gap-2 text-gray-700 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
+          <lord-icon
+            src="https://cdn.lordicon.com/ihajlcqd.json"
+            trigger="hover"
+            style={{ width: "14px", height: "14px" }}>
+          </lord-icon>
+          Fashion & beauty
+        </li>
+        <li className="flex items-center gap-2 text-gray-700 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
+          <lord-icon
+            src="https://cdn.lordicon.com/ceogkocw.json"
+            trigger="hover"
+            style={{ width: "14px", height: "14px" }}>
+          </lord-icon>
+          Podcasts
+        </li>
+        <li className="flex items-center gap-2 text-gray-700 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
+          <lord-icon
+            src="https://cdn.lordicon.com/gemrrbjz.json"
+            trigger="hover"
+            style={{ width: "14px", height: "14px" }}>
+          </lord-icon>
+          News
+        </li>
+      </ul>
+
+      
 
     </div>
   );
