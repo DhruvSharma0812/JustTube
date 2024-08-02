@@ -1,6 +1,8 @@
 import React from 'react';
 
-const VideoCard = ({ info }) => {
+const VideoCard = ({ id, info }) => {
+  console.log (id )
+  if (id === "RKZJtoFoaQg") return null;
   if (!info) {
     return null; // Return null if info is not provided
   }
