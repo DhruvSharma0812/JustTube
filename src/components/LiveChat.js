@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import ChatMessage from './ChatMessage'
-import { useDispatch, useSelector } from 'react-redux'
-import { generateRandomName, makeRandomMessage } from '../utils/helper'
-import { addMessages } from '../utils/chatSlice'
+import React, { useEffect, useState } from 'react';
+import ChatMessage from './ChatMessage';
+import { useDispatch, useSelector } from 'react-redux';
+import { generateRandomName, makeRandomMessage } from '../utils/helper';
+import { addMessages } from '../utils/chatSlice';
 
 const LiveChat = () => {
 
     const dispatch = useDispatch();
-    const [liveMessage, setLiveMessage] = useState();
-    const chatMessage = useSelector((store) => store.chat.messages)
+    const [liveMessage, setLiveMessage] = useState("");
+    const chatMessage = useSelector((store) => store.chat.messages);
 
     useEffect(() => {
         const i = setInterval(() => {
@@ -19,12 +19,10 @@ const LiveChat = () => {
                     message: makeRandomMessage(20),
                 })
             );
-
         }, 2000);
 
-        return () => { clearInterval(i) }
-    }, [])
-
+        return () => { clearInterval(i); };
+    }, [dispatch]);
 
     return (
         <>
@@ -32,9 +30,7 @@ const LiveChat = () => {
                 <div>
                     {
                         chatMessage.map((c, i) => (
-
                             <ChatMessage key={i} name={c.name} message={c.message} />
-
                         ))
                     }
                 </div>
@@ -44,9 +40,8 @@ const LiveChat = () => {
                 className='border border-black p-2 m-2 mt-0 w-full rounded-b-lg bg-white'
                 onSubmit={(e) => {
                     e.preventDefault();
-
-                    dispatch (
-                        addMessages ({
+                    dispatch(
+                        addMessages({
                             name: "Dhruv Sharma",
                             message: liveMessage,
                         })
@@ -56,16 +51,14 @@ const LiveChat = () => {
             >
                 <input
                     type="text" 
-                    className='px-2 w-3/4 border border-slate-700 '
+                    className='px-2 w-3/4 border border-slate-700'
                     value={liveMessage}
-                    onChange={(e) => {
-                        setLiveMessage (e.target.value)
-                    }}
+                    onChange={(e) => setLiveMessage(e.target.value)}
                 />
                 <button className='px-2 mx-2 bg-green-100'>Send</button>
             </form>
         </>
-    )
-}
+    );
+};
 
-export default LiveChat
+export default LiveChat;

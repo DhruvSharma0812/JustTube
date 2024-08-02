@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
 import { LOGO, YOUTUBE_SEARCH_API } from '../utils/constants';
 import { cacheResults } from '../utils/searchSlice';
@@ -15,16 +15,35 @@ const Header = () => {
   const navigate = useNavigate();
 
   const toggleMenuHandler = () => {
-    dispatch(toggleMenu())
-  }
+    dispatch(toggleMenu());
+  };
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
       navigate(`/results?search_query=${searchQuery}`); // Navigate to Results page with search query
     }
-  }
+  };
 
   useEffect(() => {
+    const getSearchSuggestions = async () => {
+      if (!searchQuery) {
+        setSuggestions([]);
+        return;
+      }
+      try {
+        const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+        const json = await data.json();
+        setSuggestions(json[1] || []);
+        dispatch(
+          cacheResults({
+            [searchQuery]: json[1],
+          })
+        );
+      } catch (error) {
+        console.error('Error fetching suggestions:', error);
+      }
+    };
+
     const timer = setTimeout(() => {
       if (searchCache[searchQuery]) {
         setSuggestions(searchCache[searchQuery]);
@@ -36,32 +55,13 @@ const Header = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [searchQuery]);
-
-  const getSearchSuggestions = async () => {
-    if (!searchQuery) {
-      setSuggestions([]);
-      return;
-    }
-    try {
-      const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
-      const json = await data.json();
-      setSuggestions(json[1] || []);
-      dispatch(
-        cacheResults({
-          [searchQuery]: json[1],
-        })
-      );
-    } catch (error) {
-      console.error('Error fetching suggestions:', error);
-    }
-  };
+  }, [searchQuery, searchCache, dispatch]);
 
   const handleSuggestionClick = (suggestion) => {
-    setSearchQuery (suggestion);
-    setShowSuggestions (false);
-    navigate (`/results?search_query=${searchQuery}`);
-  }
+    setSearchQuery(suggestion);
+    setShowSuggestions(false);
+    navigate(`/results?search_query=${suggestion}`);
+  };
 
   return (
     <div className='grid grid-flow-col p-3 shadow-lg bg-white items-center'>
@@ -103,7 +103,7 @@ const Header = () => {
         </div>
 
         {showSuggestions && suggestions.length > 0 && (
-          <div className=' absolute w-[36.9%] left-[34.33333%] bg-white py-2 px-2 shadow-lg rounded-lg border border-gray-100'>
+          <div className='absolute w-[36.9%] left-[34.33333%] bg-white py-2 px-2 shadow-lg rounded-lg border border-gray-100'>
             <ul>
               {suggestions.map((s) => (
                 <li 
@@ -127,7 +127,7 @@ const Header = () => {
         </lord-icon>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Header;

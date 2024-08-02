@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { closeMenu } from '../utils/appSlice';
 import { useSearchParams } from 'react-router-dom';
@@ -12,7 +12,7 @@ const WatchPage = () => {
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
     const [info, setInfo] = useState({});
-    const [isDescriptionVisible, SetIsDescriptionVisible] = useState(false);
+    const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
 
     const formatCount = (count) => {
         if (count >= 1000) {
@@ -21,7 +21,7 @@ const WatchPage = () => {
         return count.toString();
     };
 
-    const getVideoInfo = async () => {
+    const getVideoInfo = useCallback(async () => {
         try {
             const videoId = searchParams.get("v");
             const response = await fetch(`${VIDEO_INFO_API}&id=${videoId}&key=${GOOGLE_API_KEY}`);
@@ -35,25 +35,25 @@ const WatchPage = () => {
         } catch (error) {
             console.error("Error fetching video info:", error);
         }
-    };
+    }, [searchParams]);
 
     useEffect(() => {
         dispatch(closeMenu());
         getVideoInfo();
-    }, [dispatch, searchParams]);
+    }, [dispatch, getVideoInfo]);
 
     const { snippet = {}, statistics = {} } = info || {};
     const { channelTitle = '', title = '', description = '', thumbnails = {} } = snippet || {};
     const { viewCount = 0, likeCount = 0, commentCount = 0 } = statistics || {};
 
     const toggleDescription = () => {
-        SetIsDescriptionVisible(!isDescriptionVisible);
+        setIsDescriptionVisible(!isDescriptionVisible);
     };
 
     return (
-        <div className='md:flex md:flex-wrap md:justify-start  ml-24 md:w-full mt-6 '>
-            <div className='  flex flex-col md:w-3/5 md:mr-3 mb-4' >
-                <div className=''>
+        <div className='md:flex md:flex-wrap md:justify-start ml-24 md:w-full mt-6'>
+            <div className='flex flex-col md:w-3/5 md:mr-3 mb-4'>
+                <div>
                     <iframe
                         className="md:h-[30rem] h-60 w-full rounded-lg"
                         src={`https://www.youtube.com/embed/${searchParams.get("v")}`}
