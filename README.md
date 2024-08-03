@@ -2,6 +2,8 @@
 
 justTube is a clone of the popular video-sharing platform YouTube, developed as part of Akshay Saini's Namaste React course. Built with modern front-end technologies like React, Redux Toolkit, TailwindCSS, and other libraries, justTube replicates the UI design and functionalities of YouTube.
 
+Project Live At : https://main--justtube.netlify.app/
+
 ## Features
 - YouTube Clone: justTube is a replica of the YouTube platform, mirroring its UI design and functionalities.
 - YouTube Video List: Displays a paginated list of YouTube videos fetched from the YouTube API, with lazy loading for enhanced performance.
