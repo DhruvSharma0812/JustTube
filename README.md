@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# justTube
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+justTube is a clone of the popular video-sharing platform YouTube, developed as part of Akshay Saini's Namaste React course. Built with modern front-end technologies like React, Redux Toolkit, TailwindCSS, and other libraries, justTube replicates the UI design and functionalities of YouTube.
 
-## Available Scripts
+## Features
+- YouTube Clone: justTube is a replica of the YouTube platform, mirroring its UI design and functionalities.
+- YouTube Video List: Displays a paginated list of YouTube videos fetched from the YouTube API, with lazy loading for enhanced performance.
+- YouTube Video Preview: Clicking on a video in the list opens a preview window with the video, including its title, description, and view count.
+- Search Suggestions: As the user types in the search bar, a dropdown list of suggested search queries is displayed, enhancing the user experience and easing video 
+  discovery.
+- Search Caching: To improve performance and reduce API calls, justTube caches the results of previous searches. Repeat queries fetch results from the cache        
+  instead of making new API calls.
+- Optimized Search Using Debouncing and Caching: Debouncing optimizes the search functionality by waiting for the user to stop typing before making an API call.      Caching fetches results faster for previous searches.
+- Optimized API Calls Using Debouncing: Debouncing is used throughout the app to reduce API calls and improve performance. For example, additional videos are       
+  fetched only after the user has stopped scrolling.
+- Comments on YouTube: Includes a comments section where users can view and post comments on videos. Comments are fetched from the YouTube API and displayed in a 
+  threaded view for better readability.
+- N-Level Deep Comments Using Recursion: Supports nested comments up to any level of depth, implemented using recursion for an intuitive and organized comment        structure.
+- Live Chat on YouTube: Features a live chat that allows users to view and send messages in real-time. Implemented with API polling, the app regularly fetches new    messages and updates the UI accordingly.
 
-In the project directory, you can run:
 
-### `npm start`
+## To use this project, follow these steps:
+- Clone the repository.
+- Install the dependencies using npm install.
+- Create a .env file in the root directory and add your YouTube API key as GOOGLE_API_KEY=<your-api-key>.
+- Start the development server using npm start.
+- Open your web browser and navigate to http://localhost:3000.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Issues Faced
+Handling Live API for Live Chat: Implementing live chat required dealing with real-time data, which posed challenges. Data polling was used to fetch live chat data continuously and update the UI seamlessly.
+Optimizing Search Functionality: Ensuring efficient and responsive search recommendations involved using debouncing to skip unnecessary API calls and caching to reduce latency.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Conclusion
+justTube demonstrates how to build a modern web application using React, Redux Toolkit, TailwindCSS, and other libraries. The project includes features like search suggestions, search caching, optimized search and API calls using debouncing, a comments section, live chat, and deep nested comments using recursion. These features not only replicate YouTube's functionalities but also showcase techniques applicable to any large-scale web application.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Dependencies
+This project uses the following dependencies:
+- React
+- Redux Toolkit
+- React Router DOM
+- TailwindCSS
+These dependencies are listed in the package.json.
